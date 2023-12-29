@@ -74,7 +74,7 @@ public class JdbcUserDao implements UserDao {
     public User createUser(RegisterUserDto user) {
         User newUser = null;
         // create user
-        String sql = "INSERT INTO users (username, password_hash) VALUES (?, ?) RETURNING user_id";
+        String sql = "INSERT INTO users (username, password_hash, role) VALUES (?, ?, 'ROLE_USER') RETURNING user_id";
         String password_hash = new BCryptPasswordEncoder().encode(user.getPassword());
         try {
             int newUserId = jdbcTemplate.queryForObject(sql, int.class, user.getUsername(), password_hash);

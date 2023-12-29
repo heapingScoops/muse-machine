@@ -42,6 +42,9 @@ public class CloudinaryService {
         catch(IOException e){
             return e.getMessage();
         }
+        catch(Exception e){
+            return e.getMessage();
+        }
     }
 
 

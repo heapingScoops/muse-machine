@@ -46,5 +46,8 @@ export default {
 body {
   font-family: specialElite, fira, 'Josefin Sans', sans-serif;
 }
+.page-title{
+  font-size: 3em;
+}
 
 </style>

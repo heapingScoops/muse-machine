@@ -13,6 +13,16 @@ public class RegisterUserDto {
     private String username;
     @NotEmpty
     private String password;
+    @NotEmpty
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getUsername() {
         return username;

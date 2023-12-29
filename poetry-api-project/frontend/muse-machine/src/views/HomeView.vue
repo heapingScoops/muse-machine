@@ -33,7 +33,7 @@ export default {
             this.startDriftingOut();
             
             //call service that (a) grabs poem, (b) grabs img url, (c) returns that object
-            this.poem = await apiService.getRandomPoem();
+            this.poem = await apiService.getRandomPoem(this.$store.state.token);
 
             
 

@@ -1,17 +1,19 @@
 import axios from 'axios';
 
-const http = axios.create({
-    baseURL: 'http://localhost:8080/'
-});
+
+
 
 export default {
-    async getRandomPoem() {
+    async getRandomPoem(token) {
+        console.log(token);
+        // const headers = { 'Authorization': `Bearer ${token}` };
+        
         let randomId;
 
         let myPoem = {};
         while(true){
             randomId = Math.floor(Math.random() * 13000);
-            await http.get('poems/' + randomId)
+            await axios.get(`http://localhost:8080/poems/${randomId}`, {headers:{ 'Authorization': `Bearer ${token}`}})
                 .then(response => myPoem = response.data)
                 .catch(error => {
                     console.error('Error:', error);
@@ -29,7 +31,7 @@ export default {
         //myPoem.imgUrl = '../src/assets/images/typewriter-3.png';
 
         // DALLE call to get URL
-        await http.get('image/poems/' + randomId).then(response => {
+        await axios.get('http://localhost:8080/image/poems/' + randomId, {headers:{ 'Authorization': `Bearer ${token}`}}).then(response => {
             let myDalleObj = response.data; 
             myPoem.imgUrl = response.data;
         })

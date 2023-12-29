@@ -4,27 +4,29 @@ import javax.validation.Valid;
 
 import com.techelevator.tenmo.exception.DaoException;
 import com.techelevator.tenmo.model.LoginResponseDto;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.*;
 
 import com.techelevator.tenmo.dao.UserDao;
 import com.techelevator.tenmo.model.LoginDto;
 import com.techelevator.tenmo.model.RegisterUserDto;
 import com.techelevator.tenmo.model.User;
+
+import com.techelevator.tenmo.security.jwt.JWTFilter;
 import com.techelevator.tenmo.security.jwt.TokenProvider;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
  * Controller to authenticate users.
  */
+@CrossOrigin
 @RestController
 public class AuthenticationController {
 
@@ -39,7 +41,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public LoginResponseDto login(@Valid @RequestBody LoginDto loginDto) {
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
@@ -55,7 +57,9 @@ public class AuthenticationController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username or password is incorrect.");
         }
 
-        return new LoginResponseDto(jwt, user);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        return new ResponseEntity<>(new LoginResponseDto(jwt, user), httpHeaders, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
