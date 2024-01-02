@@ -6,7 +6,7 @@ import axios from 'axios';
 export default {
     async getRandomPoem(token) {
         console.log(token);
-        // const headers = { 'Authorization': `Bearer ${token}` };
+        
         
         let randomId;
 

@@ -12,7 +12,10 @@
                     Machine
                 </span>
             </div>
-            <div v-on:click="generateRandomPoem" id="button-55"  class="gonna-drift" role="button">start the machine...</div>
+            <div v-on:click="generateRandomPoem" id="button-55" v-if="this.$store.state.token != ''" class="gonna-drift" role="button">start the machine...</div>
+            <router-link v-bind:to="{name: 'register'}" v-if="this.$store.state.token == ''" class="register-button">
+                <div id="button-55" role="button">Who are you?</div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -82,7 +85,9 @@ export default {
 
 
 <style>
-
+.register-button {
+    text-decoration: none;
+}
 
 .fadeToBlack {
     animation-name: fadeToBlack;

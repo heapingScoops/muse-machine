@@ -4,14 +4,11 @@
             <img id="logo" src="../assets/images/muse-machine-logo.png">
             <router-link v-bind:to="{name: 'home'}" id="home-link" class="nav-option">Home</router-link>
             <span id="nav-space"></span>
-            <router-link v-bind:to="{name: 'register'}" class="nav-option">Register</router-link>
-            <router-link v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''" class="nav-option">
-              Logout
-            </router-link>
-            
-            <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''" class="nav-option">
-              Login
-            </router-link>
+            <router-link v-bind:to="{name: 'register'}" v-if="this.$store.state.token == ''" class="nav-option">Register</router-link>
+            <span> &nbsp </span>
+            <router-link v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''" class="nav-option">Logout</router-link>
+            <span> &nbsp </span>
+            <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''" class="nav-option">Login</router-link>
         </nav>
 
     </div>
