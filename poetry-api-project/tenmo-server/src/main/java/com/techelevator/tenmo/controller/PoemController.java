@@ -6,6 +6,7 @@ import com.techelevator.tenmo.Services.SummaryService;
 import com.techelevator.tenmo.dao.CreationDao;
 import com.techelevator.tenmo.dao.PoemDao;
 import com.techelevator.tenmo.dao.UserDao;
+import com.techelevator.tenmo.model.Creation;
 import com.techelevator.tenmo.model.Poem;
 import com.techelevator.tenmo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -65,6 +67,15 @@ public class PoemController {
         creationDao.newCreation(cloudinaryUrl, userId, poem.getPoemId());
 
         return cloudinaryUrl;
+    }
+
+    @GetMapping(path = "creations")
+    public List<Creation> getCreations(Principal principal){
+        //obtain current userId
+        int userId = userDao.getUserByUsername(principal.getName()).getId();
+
+        //get creations
+        return creationDao.fetchCreationsByUserId(userId);
     }
 
 
