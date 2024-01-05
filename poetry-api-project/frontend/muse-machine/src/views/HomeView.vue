@@ -34,30 +34,22 @@ export default {
     methods: {
         async generateRandomPoem() {
             this.startDriftingOut();
-            
-            //call service that (a) grabs poem, (b) grabs img url, (c) returns that object
-            this.poem = await apiService.getRandomPoem(this.$store.state.token);
 
-            
+            //call service that (a) grabs poem, (b) grabs img url, (c) returns a poem object
+            //WAIT: this.poem = await apiService.getRandomPoem(this.$store.state.token);
+            const newCreation = await apiService.getRandomPoem(this.$store.state.token);
 
             //add poem to store
-            this.$store.commit('NEW_POEM', this.poem);
-
-
-
-            //push to poemView
-            
+            //WAIT: this.$store.commit('NEW_POEM', this.poem);
+            this.$store.commit('NEW_CREATION', newCreation);
+            console.log(newCreation)
 
             // setTimeout( () =>
             // this.$router.push({ name: 'poem', params: { creationId: this.poem.creationId } }), 12000)
 
-            this.$router.push({ name: 'poem', params: { creationId: this.poem.creationId } })
-
-
-            //reset poem
-            //this.poem = {}
-
-
+            //push to poemView
+            //WAIT: this.$router.push({ name: 'poem', params: { creationId: this.poem.creationId } })
+            this.$router.push({ name: 'poem', params: { creationId: newCreation.creationId } })
         },
         startDriftingOut() {
             const words = this.$el.querySelectorAll('.gonna-drift');
@@ -205,6 +197,45 @@ export default {
 
 
 #button-55:focus {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+.button-100 {
+    margin: auto;
+    align-self: center;
+    background-color: rgb(249, 255, 231);
+    background-image: none;
+    /* background-position: 0 90%;
+    background-repeat: repeat no-repeat;
+    background-size: 4px 3px; */
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+    box-sizing: border-box;
+    color: #41403e;
+    cursor: pointer;
+    font-size: 1.5em;
+    outline: none;
+    padding: .75rem;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-100:hover {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+    transform: translate3d(0, 2px, 0);
+}
+
+
+.button-100:focus {
     box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
 </style>

@@ -1,33 +1,37 @@
 <template>
-<div id="login">
-    <form v-on:submit.prevent="login">
-      <h1 class="page-title">Please Sign In</h1>
-      <div role="alert" v-if="invalidCredentials">
-        Invalid username and password!
-      </div>
-      <div role="alert" v-if="this.$route.query.registration">
-        Thank you for registering, please sign in.
-      </div>
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input  class="form-control" type="text" id="username" v-model="user.username" required autofocus />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input  class="form-control" type="password" id="password" v-model="user.password" required />
-      </div>
-      <button type="submit" id="sign-in-btn" class="standard-button">Sign in</button>
-      <p>
-      <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
-    </form>
-  </div>
+  
+    <div id="login">
+      <form v-on:submit.prevent="login">
+        <h1 class="page-title">Who are you?</h1>
+        <div role="alert" v-if="invalidCredentials">
+          Invalid username and password!
+        </div>
+        <div role="alert" v-if="this.$route.query.registration">
+          Thank you for registering, please sign in.
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input class="form-control" type="text" id="username" v-model="user.username" required autofocus />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input class="form-control" type="password" id="password" v-model="user.password" required />
+        </div>
+        <button type="submit"  class="button-100">Sign in</button>
+        <p>
+          <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link>
+        </p>
+      </form>
+    </div>
+  
 </template>
 
 <script>
+// import 'vuetify/styles'
 import authService from '../services/authServise.js';
 
 export default {
-  components: {},   
+  components: {},
   data() {
     return {
       user: {
@@ -42,12 +46,12 @@ export default {
       authService
         .login(this.user)
         .then(response => {
-            console.log(response.data)
+          console.log(response.data)
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            this.$router.push({name: "home"});
-         
+            this.$router.push({ name: "home" });
+
           }
         })
         .catch(error => {
@@ -63,17 +67,19 @@ export default {
 </script>
 
 <style scoped>
-#login{
+#login {
   width: 40%;
   margin: auto;
 }
-#sign-in-btn{
+
+#sign-in-btn {
   margin: 2rem 0rem 1rem 0rem;
 }
+
 .form-group {
   margin-bottom: 1rem;
 }
+
 label {
   margin-right: 0.5rem;
-}
-</style>
+}</style>

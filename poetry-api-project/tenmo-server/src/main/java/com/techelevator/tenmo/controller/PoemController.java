@@ -46,7 +46,7 @@ public class PoemController {
 
     //gets the associated image by poem id
     @GetMapping(path = "image/poems/{id}")
-    public String getImageByPoemId(@PathVariable int id, Principal principal) throws IOException {
+    public Creation getImageByPoemId(@PathVariable int id, Principal principal) throws IOException {
 
 
 
@@ -62,11 +62,11 @@ public class PoemController {
 
         //pass temporary url to cloudinary to save and return permanent url
         String cloudinaryUrl = cloudinaryService.uploadTest(dalleBlobUrl);
+        System.out.println(cloudinaryUrl);
+        //add new creation to database
 
-        //make new creation
-        creationDao.newCreation(cloudinaryUrl, userId, poem.getPoemId());
 
-        return cloudinaryUrl;
+        return creationDao.newCreation(cloudinaryUrl, userId, poem.getPoemId());
     }
 
     @GetMapping(path = "creations")
@@ -76,6 +76,13 @@ public class PoemController {
 
         //get creations
         return creationDao.fetchCreationsByUserId(userId);
+    }
+
+    @GetMapping(path = "sql-backup")
+    public void sqlBackup(Principal principal){
+
+
+        creationDao.sqlBackup();
     }
 
 

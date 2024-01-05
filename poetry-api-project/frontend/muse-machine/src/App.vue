@@ -1,10 +1,12 @@
 <template>
-  <div id="website">
-    <the-header />
-    <main>
-      <router-view />
-    </main>
-  </div>
+  <!-- <v-app> -->
+    <div id="website">
+      <the-header />
+      <main>
+        <router-view />
+      </main>
+    </div>
+  <!-- </v-app> -->
 </template>
 
 
@@ -43,11 +45,40 @@ export default {
   src: url(./assets/fonts/Fira_Code/static/FiraCode-Regular.ttf);
 }
 
-body {
+body, input, button{
   font-family: specialElite, fira, 'Josefin Sans', sans-serif;
 }
-.page-title{
+/* input { 
+  font-family: specialElite, fira, 'Josefin Sans', sans-serif;
+} */
+
+.page-title {
   font-size: 3em;
 }
+
+.form-control {
+  display: block;
+  width: 70%;
+  height: 2rem;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  outline: none;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  font-size: 1em;
+  padding: 5px;
+}
+label {
+  font-size: 1.25em;
+}
+
 
 </style>

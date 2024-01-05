@@ -26,8 +26,8 @@ public class JdbcCreationDao implements CreationDao{
 
     }
     @Override
-    public int newCreation(String cloudinaryUrl, int userId, int poemId) {
-
+    public Creation newCreation(String cloudinaryUrl, int userId, int poemId) {
+        Creation creation = new Creation();
         String sql = "INSERT INTO creations (url, time_stamp, poem_id, user_id) VALUES(?, now(), ?, ?) RETURNING creation_id";
         int creationId = 0;
         try{
@@ -35,7 +35,7 @@ public class JdbcCreationDao implements CreationDao{
             if(creationId == 0){
                 throw new Exception();
             }
-
+            creation = getCreationByCreationId(creationId);
         }
         catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -46,7 +46,25 @@ public class JdbcCreationDao implements CreationDao{
             throw new DaoException("Creation Failed", e);
         }
 
-        return creationId;
+        return creation;
+    }
+
+    public Creation getCreationByCreationId(int creationId){
+        Creation creation = new Creation();
+        String sql = "SELECT creation_id, url, time_stamp, poem_id, user_id FROM creations WHERE creation_id = ?;";
+
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, creationId);
+            if(results.next()){
+                creation = mapRowToCreation(results);
+
+            }
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+
+        return creation;
     }
 
     public List<Creation> fetchCreationsByUserId(int userId){
@@ -79,5 +97,29 @@ public class JdbcCreationDao implements CreationDao{
         creation.setCreationDate(results.getDate("time_stamp").toLocalDate());
 
         return creation;
+    }
+
+    public void sqlBackup(){
+        List<Creation> creations = new ArrayList<>();
+        String sql = "SELECT creation_id, url, time_stamp, poem_id, user_id FROM creations;";
+
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while(results.next()){
+                Creation currentCreation = mapRowToCreation(results);
+                creations.add(currentCreation);
+            }
+        }
+        catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+
+        for(Creation creation : creations){
+            System.out.println("INSERT INTO creations (url, time_stamp, poem_id, user_id)");
+//            System.out.println("VALUES ('https://res.c', now(), 69, 1)");
+            System.out.println("VALUES ('" + creation.getImageUrl() + "', '" + creation.getCreationDate() + "', " + creation.getPoem().getPoemId() + ", " + creation.getUserId() + ");");
+
+        }
+
     }
 }

@@ -4,12 +4,15 @@ import axios from 'axios';
 
 
 export default {
-    async getRandomPoem(token) {
-        console.log(token);
-        
-        
-        let randomId;
 
+    fetchCreations(token){
+        return axios.get('http://localhost:8080/creations')
+    },
+
+    async getRandomPoem(token) {     
+        //searches for a poem until it finds one that doesn't have fucked up line breaks
+        //NOTE: I should have done this checking on the back-end
+        let randomId;
         let myPoem = {};
         while(true){
             randomId = Math.floor(Math.random() * 13000);
@@ -21,45 +24,34 @@ export default {
             if(formValidator(myPoem.poem)){
                 break;
             }
-
         }
-        
-
-        console.table(myPoem)
 
         //Placeholder image
         //myPoem.imgUrl = '../src/assets/images/typewriter-3.png';
 
-        // DALLE call to get URL
+        let newCreation = {};
+        //sends the approved poemId to backend to generate an image
         await axios.get('http://localhost:8080/image/poems/' + randomId, {headers:{ 'Authorization': `Bearer ${token}`}}).then(response => {
-            let myDalleObj = response.data; 
-            myPoem.imgUrl = response.data;
+            
+            newCreation = response.data;
         })
         .catch(error => {
             console.error('Error:', error);
         });
 
-        
-
-        return myPoem;
-
+        return newCreation;
     }
     
 }
 
-//the below function counts the number of line breaks; if it's below fifteen, it will just get a new goddamn poem.
+//counts the number of line breaks; if it's below fifteen, it will get a new goddamn poem.
 function formValidator(poemText){
     let count = 0;
-    
-        
-    
     let position = poemText.indexOf(`\n`);
-
     while (position !== -1) {
-    count++;
-    position = poemText.indexOf(`\n`, position + 1);
+        count++;
+        position = poemText.indexOf(`\n`, position + 1);
     }
-
     if(count < 15){
         return false;
     }

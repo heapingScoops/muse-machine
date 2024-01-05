@@ -7,37 +7,41 @@ export function createStore(currentToken, currentUser) {
         state: {
             token: currentToken || '',
             user: currentUser || {},
-            nextCreationId: 2,
-            poems: [
+            // nextCreationId: 2,
+            newCreation: {
+                creationId: 0,
+                userId: 0,
+                imageUrl: '',
+                creationDate: '',
+                poem: {
+                    poem: '',
+                    poemId: 0,
+                    poet: '',
+                    tags: '',
+                    title: '',
+                }
+            },
+            creations: [
                 {
                     creationId: 0,
-                    poemId: 0,
-                    poem: '',
-                    poet: '',
-                    tags: [],
-                    title: '',
-                    imgUrl: ''
-                },
-                {
-                    creationId: 1,
-                    poemId: 0,
-                    poem: '',
-                    poet: '',
-                    tags: [],
-                    title: '',
-                    imgUrl: ''
+                    userId: 0,
+                    imageUrl: '',
+                    creationDate: '',
+                    poem: {
+                        poem: '',
+                        poemId: 0,
+                        poet: '',
+                        tags: '',
+                        title: '',
+                    }
                 }
-
-
-
-
-            ]
+            ],
 
         },
         mutations: {
-            NEW_POEM(state, poem) {
-                poem.creationId = this.state.nextCreationId++;
-                state.poems.unshift(poem);
+            NEW_CREATION(state, creation) {
+                state.newCreation = creation
+                
             },
             SET_AUTH_TOKEN(state, token) {
                 state.token = token;
@@ -54,6 +58,11 @@ export function createStore(currentToken, currentUser) {
                 state.token = '';
                 state.user = {};
                 axios.defaults.headers.common = {};
+            },
+            FETCH_CREATIONS(state,creations) {
+                    state.creations = creations;
+           
+                
             }
         },
            

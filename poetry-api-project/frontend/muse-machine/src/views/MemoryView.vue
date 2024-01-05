@@ -1,7 +1,6 @@
 <template>
-    <div id="poem-view" v-bind:class="{fadeIn: created}">
-        
-        <the-poem v-bind:creation=newCreation />
+    <div>
+        <the-poem v-bind:creation=selectedCreation />
     </div>
 
 </template>
@@ -13,22 +12,19 @@ export default{
     components: {
         ThePoem
     },
-    data(){
-        return{
-            created: false,
-            // newCreation: 
-        }
-    },
     computed: {
         creationId(){
             return this.$route.params.creationId;
         },
-        newCreation(){
-            return this.$store.state.newCreation;
+        selectedCreation(){
+            return this.$store.state.creations.find( creation => {
+                return creation.creationId == this.creationId
+            })
         }
     },
     created (){
         this.created = true;
+        console.log(this.creation)
 
     }
 

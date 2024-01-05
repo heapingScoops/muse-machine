@@ -10,11 +10,13 @@ import { createRouter as _createRouter, createWebHistory } from 'vue-router';
 
 //import views 
 import HomeView from '../views/HomeView.vue'
-import RegisterUserView from '../views/RegisterUserView.vue'
+// import RegisterUserView from '../views/RegisterUserView.vue'
 import PoemView from '../views/PoemView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
 import LogoutView from '../views/LogoutView.vue';
+import HistoryView from '../views/HistoryView.vue';
+import MemoryView from '../views/MemoryView.vue'
 
 //log routes 
 const routes = [
@@ -26,7 +28,7 @@ const routes = [
     {
         path: '/register',
         name: 'register-user',
-        component: RegisterUserView
+        component: RegisterView
     },
     {
         path: '/poem/:creationId',
@@ -47,7 +49,17 @@ const routes = [
       path: "/logout",
       name: "logout",
       component: LogoutView,
-    }
+    },
+    {
+      path: "/memories",
+      name: "history",
+      component: HistoryView,
+    },
+    {
+      path: '/poem/:creationId',
+      name: 'memory',
+      component: MemoryView
+  },
 
   ];
   
