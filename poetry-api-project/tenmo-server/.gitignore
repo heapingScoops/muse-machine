@@ -2,7 +2,7 @@
 *.class
 
 #ignore .env which holds API keys
-*.env
+.env
 
 # ignore files created by Eclipse
 target/
