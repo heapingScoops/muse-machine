@@ -1,10 +1,10 @@
 <template>
-    <div id="historyView">
+    <div id="history-view">
+        <h1 class="page-title memories-title">Memories...</h1>
 
-        <table id="history-table">
+        <table id="history-table ">
             <thead class="thead">
                 <tr>
-                    <!-- <th class="result-number-column" scope="col"></th> -->
                     <th class="birthday-column" scope="col">Birth Day</th>
                     <th class="img-column" scope="col"></th>
                     <th class="poet-column" scope="col">poet</th>
@@ -13,9 +13,6 @@
             </thead>
             <tbody>
                 <tr v-for="(creation, index) in this.$store.state.creations" :key=index>
-                    <!-- <td>
-                        {{ index }}
-                    </td> -->
                     <td>
                         {{ creation.creationDate }}
                     </td>
@@ -84,10 +81,14 @@ export default {
 </script>
 
 <style scoped>
-#history-table {
+#history-view{
     width: 75%;
     margin: auto;
 }
+.memories-title{
+    margin: 5% 0;
+}
+
 th {
     font-size: 1.5em;
 }
@@ -103,9 +104,6 @@ th {
 }
 
 td {
-  /* display: block;
-  width: 70%;
-  height: 2rem; */
   border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
   border-style: solid;
   border-width: 2px;

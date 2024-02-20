@@ -47,25 +47,27 @@ public class PoemController {
     //gets the associated image by poem id
     @GetMapping(path = "image/poems/{id}")
     public Creation getImageByPoemId(@PathVariable int id, Principal principal) throws IOException {
-
-
-
         //obtain current userId
         int userId = userDao.getUserByUsername(principal.getName()).getId();
 
+        //get poem object from database
         Poem poem = poemDao.getPoemById(id);
+
+        //fetch summary from Cohere
         String summary =  summaryService.fetchPoemSummary(poem);
 
         //call DallE service to create the image based on the summary
-        String dalleBlobUrl = dalleService.fetchImage(summary);
-        //String dalleBlobUrl = "https://grammarist.com/wp-content/uploads/httpsgrammarist.comhomophonesbut-vs-butt-1024x478.png";
+
+            //FOR REAL: below will get an actual image
+            String dalleBlobUrl = dalleService.fetchImage(summary);
+
+            //FOR TESTING: below will just do this image
+            //String dalleBlobUrl = "https://grammarist.com/wp-content/uploads/httpsgrammarist.comhomophonesbut-vs-butt-1024x478.png";
 
         //pass temporary url to cloudinary to save and return permanent url
         String cloudinaryUrl = cloudinaryService.uploadTest(dalleBlobUrl);
-        System.out.println(cloudinaryUrl);
-        //add new creation to database
 
-
+        //add new creation to database, and return creation object to client
         return creationDao.newCreation(cloudinaryUrl, userId, poem.getPoemId());
     }
 
@@ -78,10 +80,10 @@ public class PoemController {
         return creationDao.fetchCreationsByUserId(userId);
     }
 
+    //a method that prints entire database of creations to the console in easy format
+    //for copy/pasting into .sql file to rebuild the database and keep all existing creations
     @GetMapping(path = "sql-backup")
     public void sqlBackup(Principal principal){
-
-
         creationDao.sqlBackup();
     }
 

@@ -75,14 +75,12 @@ export default {
 
 <style scoped>
 
-
+#username-div{
+  margin-bottom: 50px;
+}
 #register {
   width: 45%;
   margin: auto;
-}
-
-#organization-div {
-  margin-bottom: 2rem;
 }
 
 #create-account-btn {

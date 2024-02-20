@@ -59,5 +59,5 @@ VALUES ('https://res.cloudinary.com/djzcnmn12/image/upload/v1704409572/img-eQRZ4
 SELECT * FROM creations
 SELECT * FROM users
 
--- SELECT creation_id, url, time_stamp, poem_id, user_id FROM creations WHERE user_id = 1;
+SELECT creation_id, url, time_stamp, poem_id, user_id FROM creations WHERE user_id = 1;
 

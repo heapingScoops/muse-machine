@@ -1,10 +1,14 @@
 <template>
     <div>
         <nav id="navBar">
-            <img id="logo" src="../assets/images/muse-machine-logo.png">
-            <router-link v-bind:to="{name: 'home'}" id="home-link" class="nav-option">Home</router-link>
-            <span id="nav-space"></span>
+            
+            <router-link v-bind:to="{name: 'home'}" id="home-link" class="nav-option">
+                <img id="logo" src="../assets/images/muse-machine-logo.png">
+            </router-link>
             <router-link v-bind:to="{ name: 'history' }" v-if="this.$store.state.token != ''" class="nav-option">Memories</router-link>
+            
+            <span id="nav-space"></span>
+            
             <span> &nbsp </span>
             <router-link v-bind:to="{name: 'register'}" v-if="this.$store.state.token == ''" class="nav-option">Register</router-link>
             <span> &nbsp </span>

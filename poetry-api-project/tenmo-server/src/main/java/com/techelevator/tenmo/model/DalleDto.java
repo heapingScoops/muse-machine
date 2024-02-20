@@ -1,10 +1,10 @@
 package com.techelevator.tenmo.model;
 
 public class DalleDto {
-    String model = "dall-e-2";
+    String model = "dall-e-3";
     String prompt = "";
     int n = 1;
-    String size = "512x512";
+    String size = "1024x1024";
 
     public String getModel() {
         return model;

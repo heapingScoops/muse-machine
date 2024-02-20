@@ -5,20 +5,30 @@ import com.cloudinary.*;
 import com.cloudinary.utils.ObjectUtils;
 
 import com.techelevator.tenmo.model.CloudinaryDto;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.cloudinary.json.JSONObject;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 
 public class CloudinaryService {
 
+    //uses dotenv-java library to load the environment variables into this object
+    Dotenv dotenv = Dotenv.load();
+    String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
+    String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
+
+
     Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "djzcnmn12",
-            "api_key", "539717164663443",
-            "api_secret", "a5_QoztPe6rP0GL6wZ3Km6ePAbc"));
+            "api_key", CLOUDINARY_API_KEY,
+            "api_secret", CLOUDINARY_API_SECRET)
+    );
+
 
     private RestTemplate restTemplate = new RestTemplate();
 

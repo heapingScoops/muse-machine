@@ -2,15 +2,15 @@
     <div id="black" >
         <div id="home" v-bind:class="{fadeToBlack: clicked}">
             <div class="welcome">
-                <span class="gonna-drift">
+                <div class="gonna-drift">
                     The
-                </span>
-                <span class="gonna-drift">
+                </div>
+                <div class="gonna-drift">
                     Muse
-                </span>
-                <span class="gonna-drift">
+                </div>
+                <div class="gonna-drift">
                     Machine
-                </span>
+                </div>
             </div>
             <div v-on:click="generateRandomPoem" id="button-55" v-if="this.$store.state.token != ''" class="gonna-drift" role="button">start the machine...</div>
             <router-link v-bind:to="{name: 'register'}" v-if="this.$store.state.token == ''" class="register-button">
@@ -40,7 +40,6 @@ export default {
             const newCreation = await apiService.getRandomPoem(this.$store.state.token);
 
             //add poem to store
-            //WAIT: this.$store.commit('NEW_POEM', this.poem);
             this.$store.commit('NEW_CREATION', newCreation);
             console.log(newCreation)
 
@@ -48,14 +47,13 @@ export default {
             // this.$router.push({ name: 'poem', params: { creationId: this.poem.creationId } }), 12000)
 
             //push to poemView
-            //WAIT: this.$router.push({ name: 'poem', params: { creationId: this.poem.creationId } })
             this.$router.push({ name: 'poem', params: { creationId: newCreation.creationId } })
         },
         startDriftingOut() {
             const words = this.$el.querySelectorAll('.gonna-drift');
             this.clicked = true;
 
-            console.log(words)
+            
             for (let i = 0; i < words.length; i++) {
                 words[i].style.setProperty('--dirX', Math.random() * 1.3 - 1); // Random value between -1 and 1
                 words[i].style.setProperty('--dirY', Math.random() * 2.1 - 1);
@@ -107,7 +105,7 @@ export default {
 }
 .driftOutAlt {
     animation-name: driftOutAlt;
-    animation-duration: var(--duration, 7s); /* Adjust the duration as needed */
+    animation-duration: var(--duration, 12s); /* Adjust the duration as needed */
     animation-timing-function: ease-in-out cubic-bezier(0.68, -0.55, 0.265, 1.55);
     animation-iteration-count: 1;
 }
@@ -140,7 +138,7 @@ export default {
 .welcome {
     font-size: 10em;
     color: rgb(249, 255, 231);
-    width: 30%;
+    /* width: 70%; */
 
 }
 

@@ -86,9 +86,7 @@ public class JdbcCreationDao implements CreationDao{
     }
 
     private Creation mapRowToCreation(SqlRowSet results){
-
         Creation creation = new Creation();
-
 
         creation.setCreationId(results.getInt("creation_id"));
         creation.setPoem(poemDao.getPoemById(results.getInt("poem_id")));
@@ -109,6 +107,7 @@ public class JdbcCreationDao implements CreationDao{
                 Creation currentCreation = mapRowToCreation(results);
                 creations.add(currentCreation);
             }
+
         }
         catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -116,7 +115,6 @@ public class JdbcCreationDao implements CreationDao{
 
         for(Creation creation : creations){
             System.out.println("INSERT INTO creations (url, time_stamp, poem_id, user_id)");
-//            System.out.println("VALUES ('https://res.c', now(), 69, 1)");
             System.out.println("VALUES ('" + creation.getImageUrl() + "', '" + creation.getCreationDate() + "', " + creation.getPoem().getPoemId() + ", " + creation.getUserId() + ");");
 
         }

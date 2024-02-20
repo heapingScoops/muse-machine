@@ -54,6 +54,8 @@ body, input, button{
 
 .page-title {
   font-size: 3em;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 .form-control {

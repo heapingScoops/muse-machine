@@ -26,9 +26,6 @@ export default {
             }
         }
 
-        //Placeholder image
-        //myPoem.imgUrl = '../src/assets/images/typewriter-3.png';
-
         let newCreation = {};
         //sends the approved poemId to backend to generate an image
         await axios.get('http://localhost:8080/image/poems/' + randomId, {headers:{ 'Authorization': `Bearer ${token}`}}).then(response => {
@@ -64,13 +61,3 @@ function formValidator(poemText){
 //WHen you press the button:
 //*A horrid revving sounds* *The machine groans to life*
 //*A horrid revving sounds* *I slowly groan to life*
-
-
-
-// function checkFormatting(){
-    
-//     const poemArray = myPoem.poem.toCharArray();
-
-    
-//     if(myPoem.poem)
-// }
