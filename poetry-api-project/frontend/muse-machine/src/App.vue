@@ -48,9 +48,10 @@ export default {
 body, input, button{
   font-family: specialElite, fira, 'Josefin Sans', sans-serif;
 }
-/* input { 
-  font-family: specialElite, fira, 'Josefin Sans', sans-serif;
-} */
+body{
+  margin: 0;
+}
+
 
 .page-title {
   font-size: 3em;

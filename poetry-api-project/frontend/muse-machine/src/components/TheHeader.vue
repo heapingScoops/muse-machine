@@ -1,29 +1,44 @@
 <template>
     <div>
         <nav id="navBar">
-            
-            <router-link v-bind:to="{name: 'home'}" id="home-link" class="nav-option">
+
+            <div class="header-left">
+                <router-link v-bind:to="{ name: 'history' }" v-if="this.$store.state.token != ''" class="nav-option">
+                    Memories
+                </router-link>
+            </div>
+
+            <span id="nav-space"></span>
+
+
+            <router-link v-bind:to="{ name: 'home' }" id="home-link" class="nav-option">
                 <img id="logo" src="../assets/images/muse-machine-logo.png">
             </router-link>
-            <router-link v-bind:to="{ name: 'history' }" v-if="this.$store.state.token != ''" class="nav-option">Memories</router-link>
-            
+
             <span id="nav-space"></span>
-            
-            <span> &nbsp </span>
-            <router-link v-bind:to="{name: 'register'}" v-if="this.$store.state.token == ''" class="nav-option">Register</router-link>
-            <span> &nbsp </span>
-            <router-link v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''" class="nav-option">Logout</router-link>
-            <span> &nbsp </span>
-            <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''" class="nav-option">Login</router-link>
+
+            <div class="header-right">
+
+                <span> &nbsp </span>
+                <router-link v-bind:to="{ name: 'register' }" v-if="this.$store.state.token == ''"
+                    class="nav-option">Register</router-link>
+                <span> &nbsp </span>
+                <span> &nbsp </span>
+                <span> &nbsp </span>
+                <router-link v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''"
+                    class="nav-option">Logout</router-link>
+                <span> &nbsp </span>
+                <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''"
+                    class="nav-option">Login</router-link>
+            </div>
         </nav>
 
     </div>
-
 </template>
 
 <script>
 import RegisterUser from './RegisterUser.vue'
-export default{
+export default {
     components: {
         RegisterUser
     }
@@ -32,36 +47,51 @@ export default{
 </script>
 
 <style scoped>
-#nav-space{
+#nav-space {
     flex-grow: 1;
 }
-#navBar{
+
+#navBar {
     display: flex;
     /* background-color: rgb(249, 255, 231); */
-    color: rgb(249, 255, 231);
+    color: #fff;
     align-items: center;
-    background-color:black;
-    border-bottom:  rgb(249, 255, 231) solid 2px;
-    padding : 20px 2% 20px 0px;
+    justify-content: space-between;
+    background-color: black;
+    border-bottom: rgb(52, 50, 40) double 4px;
+    padding: 2% 5%;
+    /* border-style: ; */
 }
-.nav-option{
-    font-size:2em;
+.header-left{
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
 }
-#logo{
+.header-right{
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-option {
+    font-size: 2em;
+}
+
+#logo {
     filter: invert(1);
-    width: 100px;
+    width: 125px;
     height: auto;
     margin: 0px 20px;
 }
-a{ 
-    color:  rgb(249, 255, 231)
+
+a {
+    color: #fff
 }
-a:hover{
+
+a:hover {
     color: red;
 }
-a:after{
+
+a:after {
     color: rgb(214, 232, 78)
-}
-
-
-</style>
+}</style>
