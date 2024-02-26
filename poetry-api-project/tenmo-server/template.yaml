@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Muse Machine API, used to deal with all requests for the Muse Machine.
+
+Globals:
+  Api:
+    # API Gateway regional endpoints
+    EndpointConfiguration: REGIONAL
+
+Resources:
+  PetStoreFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.techelevator.tenmo.StreamLambdaHandler::handleRequest
+      Runtime: java11
+      CodeUri: .
+      MemorySize: 1512
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 60
+      Events:
+        FetchNewCreation:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+#        HttpApiEvent:
+#          Type: HttpApi
+#          Properties:
+#            TimeoutInMillis: 20000
+#            PayloadFormatVersion: '1.0'
+
+#Outputs:
+#  SpringBootPetStoreApi:
+#    Description: URL for application
+#    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/pets'
+#    Export:
+#      Name: SpringBootPetStoreApi
