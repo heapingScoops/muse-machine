@@ -2,11 +2,11 @@
 //bringing it into existence from the library. 
 //I think most of the time here we'll do import { createThing }, we're not just importing the library, we're drilling down to the CREATOR FILE!
 // import { createApp } from 'vue'
-import { createApp } from './node_modules/vue'
+import { createApp } from 'vue'
 import MyApp from './App.vue'
 import { createStore } from './store/store.js'
 import { createRouter } from './router/index.js'
-import axios from './node_modules/axios'
+import axios from 'axios'
 
 // import 'vuetify/styles'
 // import { createVuetify } from 'vuetify/lib/framework.mjs'
