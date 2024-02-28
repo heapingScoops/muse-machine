@@ -6,7 +6,7 @@ import { createApp } from './node_modules/vue'
 import MyApp from './App.vue'
 import { createStore } from './store/store.js'
 import { createRouter } from './router/index.js'
-import axios from '.node_modules/axios'
+import axios from './node_modules/axios'
 
 // import 'vuetify/styles'
 // import { createVuetify } from 'vuetify/lib/framework.mjs'

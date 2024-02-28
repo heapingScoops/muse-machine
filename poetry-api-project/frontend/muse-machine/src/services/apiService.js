@@ -1,4 +1,4 @@
-import axios from '.node_modules/axios';
+import axios from './node_modules/axios';
 const BASE_URL='https://3121maymp2.execute-api.us-east-2.amazonaws.com/Prod/'
 // const BASE_URL='http://localhost:8080/'
 

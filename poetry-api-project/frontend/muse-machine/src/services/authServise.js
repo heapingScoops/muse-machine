@@ -1,4 +1,4 @@
-import axios from '.node_modules/axios';
+import axios from './node_modules/axios';
 
 const http = axios.create({
     // baseURL: 'http://localhost:8080/'
