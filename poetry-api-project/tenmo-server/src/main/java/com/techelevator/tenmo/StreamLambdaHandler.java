@@ -4,6 +4,7 @@ import com.amazonaws.serverless.exceptions.ContainerInitializationException;
 import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
 import com.amazonaws.serverless.proxy.spring.SpringBootLambdaContainerHandler;
+import com.amazonaws.serverless.proxy.spring.SpringBootProxyHandlerBuilder;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 
@@ -18,6 +19,7 @@ public class StreamLambdaHandler implements RequestStreamHandler {
     //This is a static handler to manage lambda springboot requests which takes an
     // AwsProxyRequest from API Gateway, and returns an AwsProxyResponse back
     private static SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
+
     static {
         try {
             // Initializes the 'handler' with the Spring Boot application class. This line effectively starts the Spring
@@ -25,7 +27,16 @@ public class StreamLambdaHandler implements RequestStreamHandler {
             // The SpringBootLambdaContainerHandler acts as a bridge between the AWS Lambda runtime and the Spring
             // application, allowing the application to handle web requests without being aware that it is running
             // within a Lambda function.
-            handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(MuseMachineApplication.class);
+
+            //1) below is the normal way
+//            handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(MuseMachineApplication.class);
+
+            //2) this way is for applications we think will take longer than 10 seconds.
+            handler = new SpringBootProxyHandlerBuilder<AwsProxyRequest>()
+                                .defaultProxy()
+                                .asyncInit()
+                                .springBootApplication(MuseMachineApplication.class)
+                                .buildAndInitialize();
         } catch (ContainerInitializationException e) {
             // Catches the ContainerInitializationException which may be thrown if the Spring application context
             // fails to start. This exception handling block logs the stack trace of the exception for debugging purposes

@@ -31,6 +31,13 @@ public class PoemController {
     @Autowired
     CreationDao creationDao;
 
+    @GetMapping(path = "heartbeat")
+    public String heartbeat(){
+        String heartbeat="babump";
+        System.out.println("babumppp");
+        return heartbeat;
+    }
+
     //gets the entire poem object by poem id
     @GetMapping(path = "poems/{id}")
     public Poem getPoemById(@PathVariable int id){
@@ -38,14 +45,14 @@ public class PoemController {
     }
 
     //gets the summary by poem id
-    @GetMapping(path = "summary/poems/{id}")
+    @GetMapping(path = "poems/summary/{id}")
     public String getSummaryByPoemId(@PathVariable int id){
         Poem poem = poemDao.getPoemById(id);
         return summaryService.fetchPoemSummary(poem);
     }
 
     //gets the associated image by poem id
-    @GetMapping(path = "image/poems/{id}")
+    @GetMapping(path = "poems/image/{id}")
     public Creation getImageByPoemId(@PathVariable int id, Principal principal) throws IOException {
         //obtain current userId
         int userId = userDao.getUserByUsername(principal.getName()).getId();

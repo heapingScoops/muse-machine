@@ -21,8 +21,11 @@ import com.google.gson.JsonObject;
 public class DALLEService {
 
     //Use dotenv library to extract secret keys from .env file
-    Dotenv dotenv = Dotenv.load();
-    private String DALLE_AUTH_TOKEN = dotenv.get("DALLE_AUTH_TOKEN");
+//    Dotenv dotenv = Dotenv.load();
+//    private String DALLE_AUTH_TOKEN = dotenv.get("DALLE_AUTH_TOKEN");
+
+    //Use System.getenv() for AWS
+    private String DALLE_AUTH_TOKEN = System.getenv("DALLE_AUTH_TOKEN");
     private static final String baseUrl = "https://api.openai.com/v1/images/generations";
     private RestTemplate restTemplate = new RestTemplate();
 

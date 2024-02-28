@@ -18,9 +18,13 @@ import java.util.Map;
 public class CloudinaryService {
 
     //uses dotenv-java library to load the environment variables into this object
-    Dotenv dotenv = Dotenv.load();
-    String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
-    String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
+//    Dotenv dotenv = Dotenv.load();
+//    String CLOUDINARY_API_KEY = dotenv.get("CLOUDINARY_API_KEY");
+//    String CLOUDINARY_API_SECRET = dotenv.get("CLOUDINARY_API_SECRET");
+
+    //Use System.getenv() to retrieve env variables in AWS
+    String CLOUDINARY_API_KEY = System.getenv("CLOUDINARY_API_KEY");
+    String CLOUDINARY_API_SECRET = System.getenv("CLOUDINARY_API_SECRET");
 
 
     Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(

@@ -10,8 +10,11 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 public class SummaryService {
-    Dotenv dotenv = Dotenv.load();
-    private String COHERE_AUTH_TOKEN = dotenv.get("COHERE_AUTH_TOKEN");
+//    Dotenv dotenv = Dotenv.load();
+//    private String COHERE_AUTH_TOKEN = dotenv.get("COHERE_AUTH_TOKEN");
+
+    //USE System.getenv() for AWS
+    private String COHERE_AUTH_TOKEN = System.getenv("COHERE_AUTH_TOKEN");
     private static final String baseUrl = "https://api.cohere.ai/v1/summarize";
     private RestTemplate restTemplate = new RestTemplate();
 
