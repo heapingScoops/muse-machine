@@ -101,6 +101,9 @@ a:after {
    flex-wrap: wrap;
    align-content: center;
   }
+  #logo{
+    width: 100px;
+  }
 
 }
 

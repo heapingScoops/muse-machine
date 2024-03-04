@@ -43,7 +43,7 @@ export default {
     padding-top: 5%;
     background-color: rgb(250, 252, 243);
     width: 50%;
-    min-width: 600px;
+    min-width: 400px;
     margin: auto;
     padding: 5% 2%;
     border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
@@ -59,9 +59,6 @@ export default {
     border-bottom-right-radius: 225px 15px;
     border-top-left-radius: 255px 15px;
     border-top-right-radius: 15px 225px;
-
-
-
 }
 
 #poem-components {
@@ -73,8 +70,22 @@ export default {
 .poem-image {
     margin: auto;
     display: block;
-    width: 512px;
-    height: 512px;
+    /* width: 512px;
+    height: 512px; */
+    width: 80%;
+
     filter: drop-shadow(3px 8px 7px)
 }
+
+@media screen and (max-width: 650px){
+  /* #poem-container{
+    width: 90%;
+  } */
+  /* .poem-image{
+    width: 360px;
+    height: 360px;
+  } */
+
+}
+
 </style>

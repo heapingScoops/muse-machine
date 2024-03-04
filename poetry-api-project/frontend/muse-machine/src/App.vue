@@ -50,7 +50,7 @@ body, input, button{
 }
 body{
   margin: 0;
-  min-width: 450px;
+  min-width: 360px;
 }
 
 

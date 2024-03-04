@@ -123,11 +123,14 @@ td {
 }
 
 @media screen and (max-width: 650px){
-  .th{
+  th{
     font-size: 1.25rem;
   }
   #history-view{
     width: 85%;
+  }
+  .list-thumbnail{
+    width: 65px;
   }
 }
 
