@@ -4,6 +4,10 @@ Description: Muse Machine API, used to deal with all requests for the Muse Machi
 Globals:
   Api:
     EndpointConfiguration: REGIONAL
+    Cors:
+      AllowMethods: '''POST, GET, OPTIONS'''
+      AllowHeaders: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'''
+      AllowOrigin: '''*'''
 Resources:
   MuseMachineFUnction:
     Type: AWS::Serverless::Function

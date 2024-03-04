@@ -50,7 +50,9 @@ body, input, button{
 }
 body{
   margin: 0;
+  min-width: 450px;
 }
+
 
 
 .page-title {
@@ -82,6 +84,7 @@ body{
 label {
   font-size: 1.25em;
 }
+
 
 
 </style>

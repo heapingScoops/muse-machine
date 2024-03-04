@@ -138,19 +138,27 @@ export default {
 .welcome {
     font-size: 10em;
     color: rgb(249, 255, 231);
-    /* width: 70%; */
 
+
+}
+@media screen and (max-width: 800px){
+  .welcome{
+    font-size: 9rem;
+  }
+}
+@media screen and (max-width: 650px){
+  .welcome{
+    font-size: 6rem;
+  }
 }
 
 
 #home {
-
     background-image: url('../assets/images/typewriter-1.png');
     background-position: right;
     background-repeat: no-repeat;
     height: 1000px;
     padding: 2%;
-
 }
 
 #black {
@@ -203,9 +211,6 @@ export default {
     align-self: center;
     background-color: rgb(249, 255, 231);
     background-image: none;
-    /* background-position: 0 90%;
-    background-repeat: repeat no-repeat;
-    background-size: 4px 3px; */
     border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
     border-style: solid;
     border-width: 2px;
@@ -226,14 +231,13 @@ export default {
     -webkit-user-select: none;
     touch-action: manipulation;
 }
-
 .button-100:hover {
     box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
     transform: translate3d(0, 2px, 0);
 }
-
-
 .button-100:focus {
     box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
+
+
 </style>

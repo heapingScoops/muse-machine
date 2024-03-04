@@ -84,6 +84,7 @@ export default {
 #history-view{
     width: 75%;
     margin: auto;
+    
 }
 .memories-title{
     margin: 5% 0;
@@ -119,6 +120,15 @@ td {
   border-top-right-radius: 15px 225px;
   font-size: 1em;
   padding: 5px;
+}
+
+@media screen and (max-width: 650px){
+  .th{
+    font-size: 1.25rem;
+  }
+  #history-view{
+    width: 85%;
+  }
 }
 
 </style>
