@@ -81,6 +81,9 @@ export default {
   #poem-container{
     width: 80%;
   }
+  .poem-image{
+    width: 90%;
+  }
   
 
 }

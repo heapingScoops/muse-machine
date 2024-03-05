@@ -124,7 +124,11 @@ td {
 
 @media screen and (max-width: 650px){
   th{
-    font-size: 1.25rem;
+    font-size: 1em;
+  }
+    td{
+    font-size: .7em;
+    padding: 3px;
   }
   #history-view{
     width: 85%;
