@@ -1,6 +1,6 @@
 <template>
   
-    <div id="login">
+    <div class="user-form-container">
       <form v-on:submit.prevent="login">
         <h1 class="page-title">Who are you?</h1>
         <div role="alert" v-if="invalidCredentials">
@@ -67,10 +67,7 @@ export default {
 </script>
 
 <style scoped>
-#login {
-  width: 45%;
-  margin: auto;
-}
+
 
 #sign-in-btn {
   margin: 2rem 0rem 1rem 0rem;
@@ -82,4 +79,7 @@ export default {
 
 label {
   margin-right: 0.5rem;
-}</style>
+}
+
+
+</style>

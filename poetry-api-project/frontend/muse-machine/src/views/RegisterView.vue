@@ -1,5 +1,5 @@
 <template>
-  <div id="register">
+  <div class="user-form-container">
     <form v-on:submit.prevent="register">
       <h1 class="page-title">Who would you like to be?</h1>
       <div role="alert" v-if="registrationErrors">
@@ -78,10 +78,7 @@ export default {
 #username-div{
   margin-bottom: 50px;
 }
-#register {
-  width: 45%;
-  margin: auto;
-}
+
 
 #create-account-btn {
   margin: 2rem 0rem 1rem 0rem;

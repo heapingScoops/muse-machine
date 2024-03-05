@@ -1,12 +1,10 @@
 <template>
-  <!-- <v-app> -->
     <div id="website">
       <the-header />
       <main>
         <router-view />
       </main>
     </div>
-  <!-- </v-app> -->
 </template>
 
 
@@ -83,6 +81,22 @@ body{
 }
 label {
   font-size: 1.25em;
+}
+.user-form-container{
+  width: 45%;
+  margin: auto;
+}
+@media screen and (max-width: 650px){
+  .page-title{
+    font-size: 2rem;
+  }
+  .user-form-container{
+    width: 75%;
+  }
+  .form-control{
+    width: 100%;
+  }
+  
 }
 
 
