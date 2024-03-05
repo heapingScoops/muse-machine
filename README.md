@@ -1,6 +1,9 @@
 # The Muse Machine
 For the poetry-lover/AI-enthusiast (an evergrowing market), the Muse Machine: An AI-image-powered-poem-of-the-day application that retrieves a random poem from a massive database of both modern and classic poems, uses AI to summarize the poem, and then calls on DALL-E to generate a unique image based on the poem's contents. Each creation is unique and saved in a PostgreSQL database, with image hosting powered by Cloudinary. Logged in users can ponder their past creations in the Memories section. 
 
+# Live Site
+https://themusemachine.netlify.app/
+
 ## Technology Stack
 * Front-end Framework: Vue.js
 * Back-end Language: Java
