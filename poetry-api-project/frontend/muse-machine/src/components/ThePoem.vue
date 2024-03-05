@@ -77,12 +77,29 @@ export default {
     filter: drop-shadow(3px 8px 7px)
 }
 
+@media screen and (max-width: 1048px){
+  #poem-container{
+    width: 70%;
+  }
+  .poem-image{
+    width: 80%;
+  }
+  #poem-element{
+    font-size: 1em;
+  }
+  
+
+}
+
 @media screen and (max-width: 650px){
   #poem-container{
-    width: 80%;
+    width: 90%;
   }
   .poem-image{
     width: 90%;
+  }
+  #poem-element{
+    font-size: .85em;
   }
   
 

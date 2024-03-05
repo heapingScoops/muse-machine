@@ -1,17 +1,12 @@
 //------------------ IMPORTS  ----------------//
 //bringing it into existence from the library. 
 //I think most of the time here we'll do import { createThing }, we're not just importing the library, we're drilling down to the CREATOR FILE!
-// import { createApp } from 'vue'
 import { createApp } from 'vue'
 import MyApp from './App.vue'
 import { createStore } from './store/store.js'
 import { createRouter } from './router/index.js'
 import axios from 'axios'
 
-// import 'vuetify/styles'
-// import { createVuetify } from 'vuetify/lib/framework.mjs'
-// import * as components from 'vuetify/components'
-// import * as directives from 'vuetify/directives'
 
 //---------------------  AXIOS SETUP ---------------//
 let currentToken = localStorage.getItem('token');
@@ -31,17 +26,11 @@ const store = createStore(currentToken, currentUser); //----- passing in token i
 const router = createRouter();
 const app = createApp(MyApp);
 
-// const vuetify = createVuetify({
-//   components,
-//   directives,
-// })
-
 
 //------------------ USE AND MOUNT ----------------//
 //here we're telling the app to use the objects we instantiated.
 app.use(store);
 app.use(router);
-// app.use(vuetify);
 app.mount('#app');
 
 

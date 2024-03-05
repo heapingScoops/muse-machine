@@ -39,18 +39,11 @@ export default {
         async generateRandomPoem() {
             this.startDriftingOut();
 
-            
-
             //call service that (a) grabs poem, (b) grabs img url, (c) returns a poem object
-            //WAIT: this.poem = await apiService.getRandomPoem(this.$store.state.token);
             const newCreation = await apiService.getRandomPoem(this.$store.state.token);
 
             //add poem to store
             this.$store.commit('NEW_CREATION', newCreation);
-            console.log(newCreation)
-
-            // setTimeout( () =>
-            // this.$router.push({ name: 'poem', params: { creationId: this.poem.creationId } }), 12000)
 
             //push to poemView
             this.$router.push({ name: 'poem', params: { creationId: newCreation.creationId } })
@@ -75,7 +68,6 @@ export default {
         }
     }
 }
-
 </script>
 
 
@@ -88,29 +80,21 @@ export default {
 .fadeToBlack {
     animation-name: fadeToBlack;
     animation-duration: 7s;
-    /* Adjust the duration as needed */
     animation-fill-mode: forwards;
     animation-timing-function: linear;
     animation-iteration-count: 1;
 }
 
 @keyframes fadeToBlack {
-
-
     to {
         background-color: black;
-        /* Fades to black */
         opacity: 0;
     }
 }
 
-/* .gonna-drift{
-    display: inline-block;
-} */
 .driftOut {
     animation-name: driftOut;
     animation-duration: var(--duration, 10s);
-    /* Adjust the duration as needed */
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
 }
@@ -118,22 +102,18 @@ export default {
 .driftOutAlt {
     animation-name: driftOutAlt;
     animation-duration: var(--duration, 12s);
-    /* Adjust the duration as needed */
     animation-timing-function: ease-in-out cubic-bezier(0.68, -0.55, 0.265, 1.55);
     animation-iteration-count: 1;
 }
 
 @keyframes driftOut {
     to {
-        transform: translate(calc(100vw * (var(--dirX))),
-                /* Random path in X direction */
+        transform: translate(
+                calc(100vw * (var(--dirX))),
                 calc(100vh * (var(--dirY)))
-                /* Random path in Y direction */
             );
         opacity: 0;
-        /* Gradual fade out */
         font-size: .6rem;
-
     }
 }
 
@@ -147,7 +127,6 @@ export default {
 
     }
 }
-
 
 .welcome {
     font-size: 10em;

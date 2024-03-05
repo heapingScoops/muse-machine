@@ -4,7 +4,7 @@
       <form v-on:submit.prevent="login">
         <h1 class="page-title">Who are you?</h1>
         <div role="alert" v-if="invalidCredentials">
-          Invalid username and password!
+          Invalid username or password
         </div>
         <div role="alert" v-if="this.$route.query.registration">
           Thank you for registering, please sign in.
@@ -46,17 +46,14 @@ export default {
       authService
         .login(this.user)
         .then(response => {
-          console.log(response.data)
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
             this.$router.push({ name: "home" });
-
           }
         })
         .catch(error => {
           const response = error.response;
-
           if (response.status === 401) {
             this.invalidCredentials = true;
           }
@@ -67,19 +64,13 @@ export default {
 </script>
 
 <style scoped>
-
-
 #sign-in-btn {
   margin: 2rem 0rem 1rem 0rem;
 }
-
 .form-group {
   margin-bottom: 1rem;
 }
-
 label {
   margin-right: 0.5rem;
 }
-
-
 </style>

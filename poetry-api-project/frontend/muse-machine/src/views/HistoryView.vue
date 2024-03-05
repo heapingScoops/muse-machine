@@ -13,24 +13,27 @@
             </thead>
             <tbody>
                 <tr v-for="(creation, index) in this.$store.state.creations" :key=index>
-                    <td>
-                        {{ creation.creationDate }}
-                    </td>
-                    <td class="image-cell">
-                        <img class="list-thumbnail" :src="creation.imageUrl">
-                    </td>
-                    <td>
-                        {{ creation.poem.poet }}
-                    </td>
-                    
-                    <td>
-                        <router-link :to="{name: 'memory', params: { creationId: creation.creationId }}">
-                            
-                        {{ creation.poem.title }}
-                        
-                        </router-link>
-                    </td>
-                    
+           
+
+
+                        <td>
+                            {{ creation.creationDate }}
+                        </td>
+                        <td class="image-cell">
+                            <img class="list-thumbnail" :src="creation.imageUrl">
+                        </td>
+                        <td>
+                            {{ creation.poem.poet }}
+                        </td>
+
+                        <td>
+                            <router-link :to="{ name: 'memory', params: { creationId: creation.creationId } }">
+
+                                {{ creation.poem.title }}
+
+                            </router-link>
+                        </td>
+                
                 </tr>
 
             </tbody>
@@ -73,7 +76,7 @@ export default {
                 //this.creations = response.data;
                 this.$store.commit('FETCH_CREATIONS', response.data)
             })
-        
+
 
     }
 }
@@ -81,22 +84,25 @@ export default {
 </script>
 
 <style scoped>
-#history-view{
+#history-view {
     width: 75%;
     margin: auto;
-    
+
 }
-.memories-title{
+
+.memories-title {
     margin: 5% 0;
 }
 
 th {
     font-size: 1.5em;
 }
-.birthday-column{
+
+.birthday-column {
     width: 10%;
 }
-.image-cell{
+
+.image-cell {
     text-align: center;
 }
 
@@ -105,37 +111,38 @@ th {
 }
 
 td {
-  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
-  border-style: solid;
-  border-width: 2px;
-  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
-  box-sizing: border-box;
-  color: #41403e;
-  outline: none;
-  text-decoration: none;
-  transition: all 235ms ease-in-out;
-  border-bottom-left-radius: 15px 255px;
-  border-bottom-right-radius: 225px 15px;
-  border-top-left-radius: 255px 15px;
-  border-top-right-radius: 15px 225px;
-  font-size: 1em;
-  padding: 5px;
-}
-
-@media screen and (max-width: 650px){
-  th{
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+    box-sizing: border-box;
+    color: #41403e;
+    outline: none;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
     font-size: 1em;
-  }
-    td{
-    font-size: .7em;
-    padding: 3px;
-  }
-  #history-view{
-    width: 85%;
-  }
-  .list-thumbnail{
-    width: 65px;
-  }
+    padding: 5px;
 }
 
-</style>
+@media screen and (max-width: 650px) {
+    th {
+        font-size: 1em;
+    }
+
+    td {
+        font-size: .7em;
+        padding: 3px;
+    }
+
+    #history-view {
+        width: 85%;
+    }
+
+    .list-thumbnail {
+        width: 65px;
+    }
+}</style>
