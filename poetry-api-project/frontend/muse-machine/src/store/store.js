@@ -36,12 +36,12 @@ export function createStore(currentToken, currentUser) {
                     }
                 }
             ],
+            isLoading: false,
 
         },
         mutations: {
             NEW_CREATION(state, creation) {
                 state.newCreation = creation
-                
             },
             SET_AUTH_TOKEN(state, token) {
                 state.token = token;
@@ -60,9 +60,10 @@ export function createStore(currentToken, currentUser) {
                 axios.defaults.headers.common = {};
             },
             FETCH_CREATIONS(state,creations) {
-                    state.creations = creations;
-           
-                
+                state.creations = creations;
+            },
+            SET_LOADING(state,loading){
+                state.loading = loading;
             }
         },
            

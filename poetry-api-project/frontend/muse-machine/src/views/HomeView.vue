@@ -1,6 +1,9 @@
 <template>
-    <div id="black" >
-        <div id="home" v-bind:class="{fadeToBlack: clicked}">
+    <div id="black">
+        <transition name="loader">
+            <loader v-if="computed" />
+        </transition>
+        <div id="home" v-bind:class="{ fadeToBlack: clicked }">
             <div class="welcome">
                 <div class="gonna-drift">
                     The
@@ -12,8 +15,9 @@
                     Machine
                 </div>
             </div>
-            <div v-on:click="generateRandomPoem" id="button-55" v-if="this.$store.state.token != ''" class="gonna-drift" role="button">start the machine...</div>
-            <router-link v-bind:to="{name: 'register'}" v-if="this.$store.state.token == ''" class="register-button">
+            <div v-on:click="generateRandomPoem" id="button-55" v-if="this.$store.state.token != ''" class="gonna-drift"
+                role="button">start the machine...</div>
+            <router-link v-bind:to="{ name: 'register' }" v-if="this.$store.state.token == ''" class="register-button">
                 <div id="button-55" role="button">Who are you?</div>
             </router-link>
         </div>
@@ -35,6 +39,8 @@ export default {
         async generateRandomPoem() {
             this.startDriftingOut();
 
+            
+
             //call service that (a) grabs poem, (b) grabs img url, (c) returns a poem object
             //WAIT: this.poem = await apiService.getRandomPoem(this.$store.state.token);
             const newCreation = await apiService.getRandomPoem(this.$store.state.token);
@@ -53,7 +59,7 @@ export default {
             const words = this.$el.querySelectorAll('.gonna-drift');
             this.clicked = true;
 
-            
+
             for (let i = 0; i < words.length; i++) {
                 words[i].style.setProperty('--dirX', Math.random() * 1.3 - 1); // Random value between -1 and 1
                 words[i].style.setProperty('--dirY', Math.random() * 2.1 - 1);
@@ -65,7 +71,7 @@ export default {
                 }
 
             }
-            
+
         }
     }
 }
@@ -81,56 +87,64 @@ export default {
 
 .fadeToBlack {
     animation-name: fadeToBlack;
-    animation-duration: 7s; /* Adjust the duration as needed */
+    animation-duration: 7s;
+    /* Adjust the duration as needed */
     animation-fill-mode: forwards;
     animation-timing-function: linear;
     animation-iteration-count: 1;
 }
+
 @keyframes fadeToBlack {
-   
+
 
     to {
-        background-color: black; /* Fades to black */
+        background-color: black;
+        /* Fades to black */
         opacity: 0;
     }
 }
+
 /* .gonna-drift{
     display: inline-block;
 } */
 .driftOut {
     animation-name: driftOut;
-    animation-duration: var(--duration, 10s); /* Adjust the duration as needed */
+    animation-duration: var(--duration, 10s);
+    /* Adjust the duration as needed */
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
 }
+
 .driftOutAlt {
     animation-name: driftOutAlt;
-    animation-duration: var(--duration, 12s); /* Adjust the duration as needed */
+    animation-duration: var(--duration, 12s);
+    /* Adjust the duration as needed */
     animation-timing-function: ease-in-out cubic-bezier(0.68, -0.55, 0.265, 1.55);
     animation-iteration-count: 1;
 }
 
 @keyframes driftOut {
     to {
-        transform: translate(
-            calc(100vw * (var(--dirX))), /* Random path in X direction */
-            calc(100vh * (var(--dirY)))  /* Random path in Y direction */
-        );
-        opacity: 0; /* Gradual fade out */
+        transform: translate(calc(100vw * (var(--dirX))),
+                /* Random path in X direction */
+                calc(100vh * (var(--dirY)))
+                /* Random path in Y direction */
+            );
+        opacity: 0;
+        /* Gradual fade out */
         font-size: .6rem;
-        
+
     }
 }
 
 @keyframes driftOutAlt {
     to {
-        transform: translate(
-            calc(100vw * (var(--dirX))), 
-            calc(100vh * (var(--dirY))) 
-        );
-        opacity: 0; /* Gradual fade out */
+        transform: translate(calc(100vw * (var(--dirX))),
+                calc(100vh * (var(--dirY))));
+        opacity: 0;
+        /* Gradual fade out */
         font-size: 3.8rem;
-        
+
     }
 }
 
@@ -141,20 +155,23 @@ export default {
 
 
 }
-@media screen and (max-width: 800px){
-  .welcome{
-    font-size: 9rem;
-  }
+
+@media screen and (max-width: 800px) {
+    .welcome {
+        font-size: 9rem;
+    }
 }
-@media screen and (max-width: 650px){
-  .welcome{
-    font-size: 6rem;
-  }
+
+@media screen and (max-width: 650px) {
+    .welcome {
+        font-size: 6rem;
+    }
 }
-@media screen and (max-width: 450px){
-  .welcome{
-    font-size: 5rem;
-  }
+
+@media screen and (max-width: 450px) {
+    .welcome {
+        font-size: 5rem;
+    }
 }
 
 
@@ -236,13 +253,13 @@ export default {
     -webkit-user-select: none;
     touch-action: manipulation;
 }
+
 .button-100:hover {
     box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
     transform: translate3d(0, 2px, 0);
 }
+
 .button-100:focus {
     box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
-
-
 </style>

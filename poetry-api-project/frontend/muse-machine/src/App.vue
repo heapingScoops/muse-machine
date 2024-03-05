@@ -8,11 +8,6 @@
 </template>
 
 
-
-
-
-
-
 <script>
 import TheHeader from './components/TheHeader.vue'
 
