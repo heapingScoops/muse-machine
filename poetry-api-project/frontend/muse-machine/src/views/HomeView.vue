@@ -151,6 +151,11 @@ export default {
     font-size: 6rem;
   }
 }
+@media screen and (max-width: 450px){
+  .welcome{
+    font-size: 5rem;
+  }
+}
 
 
 #home {

@@ -43,7 +43,7 @@ export default {
     padding-top: 5%;
     background-color: rgb(250, 252, 243);
     width: 50%;
-    min-width: 400px;
+    /* min-width: 350px; */
     margin: auto;
     padding: 5% 2%;
     border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
@@ -78,13 +78,10 @@ export default {
 }
 
 @media screen and (max-width: 650px){
-  /* #poem-container{
-    width: 90%;
-  } */
-  /* .poem-image{
-    width: 360px;
-    height: 360px;
-  } */
+  #poem-container{
+    width: 80%;
+  }
+  
 
 }
 
