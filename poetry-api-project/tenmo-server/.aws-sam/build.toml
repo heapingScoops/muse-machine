@@ -7,6 +7,6 @@ architecture = "x86_64"
 handler = "com.techelevator.tenmo.StreamLambdaHandler::handleRequest"
 manifest_hash = ""
 packagetype = "Zip"
-functions = ["MuseMachineFUnction"]
+functions = ["MuseMachineFunction"]
 
 [layer_build_definitions]

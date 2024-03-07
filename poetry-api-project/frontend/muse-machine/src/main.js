@@ -16,7 +16,6 @@ let currentUser = JSON.parse(localStorage.getItem('user'));
 
 if (currentToken) {
   // Set token axios requests
-  console.log(`Token Value: ${currentToken}`);
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
 

@@ -12,9 +12,11 @@ Globals:
       AllowOrigin: "'*'"
 
 Resources:
-  MuseMachineFUnction:
+  MuseMachineFunction:
     Type: AWS::Serverless::Function
     Properties:
+      SnapStart:
+        ApplyOn: PublishedVersions
       Handler: com.techelevator.tenmo.StreamLambdaHandler::handleRequest
       Runtime: java11
       CodeUri: .
@@ -27,15 +29,3 @@ Resources:
           Properties:
             Path: /{proxy+}
             Method: ANY
-#        HttpApiEvent:
-#          Type: HttpApi
-#          Properties:
-#            TimeoutInMillis: 20000
-#            PayloadFormatVersion: '1.0'
-
-#Outputs:
-#  SpringBootPetStoreApi:
-#    Description: URL for application
-#    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/pets'
-#    Export:
-#      Name: SpringBootPetStoreApi

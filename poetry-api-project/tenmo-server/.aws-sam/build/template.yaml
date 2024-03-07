@@ -9,12 +9,14 @@ Globals:
       AllowHeaders: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'''
       AllowOrigin: '''*'''
 Resources:
-  MuseMachineFUnction:
+  MuseMachineFunction:
     Type: AWS::Serverless::Function
     Properties:
+      SnapStart:
+        ApplyOn: PublishedVersions
       Handler: com.techelevator.tenmo.StreamLambdaHandler::handleRequest
       Runtime: java11
-      CodeUri: MuseMachineFUnction
+      CodeUri: MuseMachineFunction
       MemorySize: 1024
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 60
@@ -25,4 +27,4 @@ Resources:
             Path: /{proxy+}
             Method: ANY
     Metadata:
-      SamResourceId: MuseMachineFUnction
+      SamResourceId: MuseMachineFunction
