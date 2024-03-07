@@ -26,5 +26,9 @@ Resources:
           Properties:
             Path: /{proxy+}
             Method: ANY
+        KeepWarmEvent:
+          Type: Schedule
+          Properties:
+            Schedule: rate(5 minutes)
     Metadata:
       SamResourceId: MuseMachineFunction

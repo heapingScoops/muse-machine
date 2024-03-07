@@ -29,3 +29,8 @@ Resources:
           Properties:
             Path: /{proxy+}
             Method: ANY
+        KeepWarmEvent:
+          Type: Schedule
+          Properties:
+            # Schedule expression: adjust the rate as needed to keep the function warm
+            Schedule: rate(5 minutes)
