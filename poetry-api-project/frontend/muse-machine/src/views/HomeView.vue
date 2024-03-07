@@ -1,8 +1,10 @@
 <template>
     <div id="black">
-        <transition name="loader">
-            <loader v-if="computed" />
-        </transition>
+        <div v-if=transitionVis id="trans-container-container">
+            <span class="trans" id="trans-container" v-html=transitionText></span>
+            <span id="blinker" class="trans"> </span>
+        </div>
+
         <div id="home" v-bind:class="{ fadeToBlack: clicked }">
             <div class="welcome">
                 <div class="gonna-drift">
@@ -15,6 +17,7 @@
                     Machine
                 </div>
             </div>
+
             <div v-on:click="generateRandomPoem" id="button-55" v-if="this.$store.state.token != ''" class="gonna-drift"
                 role="button">start the machine...</div>
             <router-link v-bind:to="{ name: 'register' }" v-if="this.$store.state.token == ''" class="register-button">
@@ -32,12 +35,19 @@ export default {
     data() {
         return {
             poem: {},
-            clicked: false
+            clicked: false,
+            transitionText: "",
+            transitionVis: false
         }
     },
     methods: {
         async generateRandomPoem() {
             this.startDriftingOut();
+
+            //we're passing in the text/html along with the type speed, and spacing out when the lines should appear
+            setTimeout(() => this.typeLetters('The machine<br>', 200), 5000);
+            setTimeout(() => this.typeLetters('slowly groans', 210), 8000);
+            setTimeout(() => this.typeLetters(' to life', 300), 11000);
 
             //call service that (a) grabs poem, (b) grabs img url, (c) returns a poem object
             const newCreation = await apiService.getRandomPoem(this.$store.state.token);
@@ -65,6 +75,22 @@ export default {
 
             }
 
+        },
+        typeLetters(transStatement, typeSpeed) {
+            this.transitionVis = true;
+
+            let index = 0;
+
+            const typeNextLetter = () => {
+                if (index < transStatement.length) {
+                    this.transitionText += transStatement.charAt(index);
+                    index++;
+                    setTimeout(typeNextLetter, typeSpeed); // Adjust the typing speed
+                }
+            };
+
+            typeNextLetter();
+
         }
     }
 }
@@ -73,6 +99,45 @@ export default {
 
 
 <style>
+#trans-container-container {
+    margin-left: 3%;
+    padding-top: 3%;
+    /* border-right: .15em solid rgb(249, 255, 231); */
+    /* The typewriter cursor */
+    /* animation: blink-caret .75s step-end infinite; */
+}
+#trans-container {
+    white-space: nowrap;
+    overflow: hidden;
+    /* border-right: .15em solid rgb(249, 255, 231); */
+    /* The typewriter cursor */
+    /* animation: blink-caret .75s step-end infinite; */
+}
+
+#blinker {
+    border-left: .15em solid rgb(249, 255, 231);
+    /* The typewriter cursor */
+    animation: blink-caret .75s step-end infinite;
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: rgb(249, 255, 231);
+    }
+}
+
+.trans {
+    font-size: 5em;
+    color: rgb(249, 255, 231);
+}
+
+
 .register-button {
     text-decoration: none;
 }
@@ -108,10 +173,8 @@ export default {
 
 @keyframes driftOut {
     to {
-        transform: translate(
-                calc(100vw * (var(--dirX))),
-                calc(100vh * (var(--dirY)))
-            );
+        transform: translate(calc(100vw * (var(--dirX))),
+                calc(100vh * (var(--dirY))));
         opacity: 0;
         font-size: .6rem;
     }
@@ -131,13 +194,14 @@ export default {
 .welcome {
     font-size: 10em;
     color: rgb(249, 255, 231);
-
-
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 865px) {
     .welcome {
         font-size: 9rem;
+    }
+    .trans{
+        font-size: 3em;
     }
 }
 
@@ -145,11 +209,17 @@ export default {
     .welcome {
         font-size: 6rem;
     }
+    .trans{
+        font-size: 2.5em;
+    }
 }
 
 @media screen and (max-width: 450px) {
     .welcome {
         font-size: 5rem;
+    }
+    .trans{
+        font-size: 2em;
     }
 }
 
