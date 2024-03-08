@@ -29,8 +29,37 @@ Resources:
           Properties:
             Path: /{proxy+}
             Method: ANY
-        KeepWarmEvent:
-          Type: Schedule
-          Properties:
-            # Schedule expression: adjust the rate as needed to keep the function warm
-            Schedule: rate(5 minutes)
+            #        KeepWarmEvent:
+            #          Type: Schedule
+            #          Properties:
+            #            # Schedule expression: adjust the rate as needed to keep the function warm
+            #            Schedule: rate(5 minutes)
+
+  KeepWarmSchedule:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: "Trigger Lambda function every 5 minutes"
+      ScheduleExpression: "rate(5 minutes)"
+      State: "ENABLED"
+      Targets:
+        - Arn: !GetAtt KeepWarmFunction.Arn
+          Id: "KeepWarmTarget"
+
+  KeepWarmFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: "keepWarm"
+      Handler: keepWarm.handler # Update this with your actual handler location
+      Runtime: nodejs20.x # Ensure this matches your Node.js runtime version
+      CodeUri: ../keep-warm/keepWarm/ # Update this with the path to your Lambda function code
+      Policies: AWSLambdaBasicExecutionRole
+      MemorySize: 512
+
+  KeepWarmPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref KeepWarmFunction
+      Action: "lambda:InvokeFunction"
+      Principal: "events.amazonaws.com"
+      SourceArn: !GetAtt KeepWarmSchedule.Arn
+

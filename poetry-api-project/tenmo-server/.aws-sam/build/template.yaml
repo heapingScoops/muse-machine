@@ -26,9 +26,39 @@ Resources:
           Properties:
             Path: /{proxy+}
             Method: ANY
-        KeepWarmEvent:
-          Type: Schedule
-          Properties:
-            Schedule: rate(5 minutes)
     Metadata:
       SamResourceId: MuseMachineFunction
+  KeepWarmSchedule:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Trigger Lambda function every 5 minutes
+      ScheduleExpression: rate(5 minutes)
+      State: ENABLED
+      Targets:
+      - Arn:
+          Fn::GetAtt:
+          - KeepWarmFunction
+          - Arn
+        Id: KeepWarmTarget
+  KeepWarmFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: keepWarm
+      Handler: keepWarm.handler
+      Runtime: nodejs20.x
+      CodeUri: KeepWarmFunction
+      Policies: AWSLambdaBasicExecutionRole
+      MemorySize: 512
+    Metadata:
+      SamResourceId: KeepWarmFunction
+  KeepWarmPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: KeepWarmFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+        - KeepWarmSchedule
+        - Arn

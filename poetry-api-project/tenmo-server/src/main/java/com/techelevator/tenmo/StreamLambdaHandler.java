@@ -22,12 +22,6 @@ public class StreamLambdaHandler implements RequestStreamHandler {
 
     static {
         try {
-            // Initializes the 'handler' with the Spring Boot application class. This line effectively starts the Spring
-            // application context and prepares the Spring Boot application to handle requests forwarded by AWS Lambda.
-            // The SpringBootLambdaContainerHandler acts as a bridge between the AWS Lambda runtime and the Spring
-            // application, allowing the application to handle web requests without being aware that it is running
-            // within a Lambda function.
-
             //1) below is the normal way
 //            handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(MuseMachineApplication.class);
 

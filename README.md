@@ -17,16 +17,20 @@ https://themusemachine.netlify.app/
   * ~~Host front-end on a static site hosting provider like Netlify~~
   * ~~Host PostgreSQL database with AWS RDS~~
   * ~~Host back-end using AWS Lambda functions~~
-    * Optimize cold starts
+    * ~~Optimize cold starts (3/7/24)~~
 * Usability
   * ~~Responsive design~~
-  * Add loading screens
+  * ~~Add loading screen (3/7/24)~~
+  * Add pagination to Memories for better performance
 * New Features:
   * Allow users to change prompt generation parameters (art style, AI temperature)
-  * Allow users to pick from a series of 4 cryptic cards with crude drawings, each of which will correspond to genres/themes of poems in the database and return a poem from that category
-  * Restrict logged-in users to 3 creations per hour
+  * Allow users to pick from a series of 4 cryptic cards with crude drawings (like Taro cards or whatever), each of which will correspond to genres/themes of poems in the database and return a poem from that category
+  * Restrict users to 3 creations per hour
   * Admin access to view creations of all users
   * An About Me page where The Muse Machine explains its mission and purpose in poem form
+  * Users can 'Favorite' memories
+  * Users can share memories to public 
+  * Users can see shared memories and upvote or downvote
 
 # Broad Future Plan
 The intent of this project was to see if I could get a pre-existing project up with AWS Lambdas. That has been a success. However, currently, keeping an entire spring boot application in a Lambda function is not ideal. Future plans are to slowly offload functionality to other AWS tools (JWT authentication to Cognito, Cloudinary image hosting to an S3 bucket), eventually replacing Spring Boot-integrated Lambda with faster, lighter more specified javascript Lambda functions. 
