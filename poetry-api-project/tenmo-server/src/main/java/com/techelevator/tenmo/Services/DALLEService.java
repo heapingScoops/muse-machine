@@ -38,9 +38,9 @@ public class DALLEService {
             Gson gson = new Gson();
 
             String dalleResponseString = restTemplate.postForObject(baseUrl, makeDalleDtoEntity(dalleDto), String.class);
-            System.out.println(dalleResponseString);
+//            System.out.println(dalleResponseString);
             JsonObject dalleResponseObject = gson.fromJson(dalleResponseString, JsonObject.class);
-            System.out.println(dalleResponseObject);
+//            System.out.println(dalleResponseObject);
 
 
             JsonArray dalleResponseObjectData = dalleResponseObject.getAsJsonArray("data");

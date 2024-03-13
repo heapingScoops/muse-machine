@@ -28,4 +28,4 @@ CREATE TABLE poetry_foundation (
 -- CSV HEADER;
 	-->Note: including the column names in the COPY directive allowed it to treat some_number as just some random-ass number
 
-SELECT * FROM poetry_foundation WHERE id = 10000
+-- SELECT * FROM poetry_foundation WHERE id = 10000

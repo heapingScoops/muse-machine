@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const http = axios.create({
     // baseURL: 'http://localhost:8080/'
-    baseURL: 'https://3121maymp2.execute-api.us-east-2.amazonaws.com/Prod/'
+    baseURL: 'https://3121maymp2.execute-api.us-east-2.amazonaws.com/Prod'
 });
 
 export default{

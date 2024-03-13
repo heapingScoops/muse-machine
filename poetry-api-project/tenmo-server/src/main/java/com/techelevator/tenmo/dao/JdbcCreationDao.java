@@ -19,7 +19,7 @@ public class JdbcCreationDao implements CreationDao{
 
     @Autowired
     PoemDao poemDao;
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public JdbcCreationDao (JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

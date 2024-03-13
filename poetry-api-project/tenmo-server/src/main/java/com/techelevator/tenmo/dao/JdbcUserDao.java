@@ -73,18 +73,27 @@ public class JdbcUserDao implements UserDao {
     @Override
     public User createUser(RegisterUserDto user) {
         User newUser = null;
-        // create user
+
         String sql = "INSERT INTO users (username, password_hash, role) VALUES (?, ?, 'ROLE_USER') RETURNING user_id";
         String password_hash = new BCryptPasswordEncoder().encode(user.getPassword());
+
+        // -- LOGGING -- //
+//            System.out.println("New username going in from jdbcdao: " + user.getUsername());
+//            System.out.println("New password hash going in jdbcdao: " + password_hash);
+        // -- LOGGING -- //
+
         try {
             int newUserId = jdbcTemplate.queryForObject(sql, int.class, user.getUsername(), password_hash);
             newUser = getUserById(newUserId);
-
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
+
+//        System.out.println("New username coming out: " + newUser.getUsername());
+//        System.out.println("New password hash coming out: " + newUser.getPassword());
+
         return newUser;
     }
 

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.techelevator.tenmo.dao.UserDao;
@@ -43,8 +44,23 @@ public class AuthenticationController {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
 
+        //creates an authentication token based on passed-in LoginDto crap (note, not yet any jwt token)
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+
+
+//        //  -----   LOGGING   ----- //
+//            System.out.println("login username recieved controller: " + loginDto.getUsername());
+//
+//            //new encoder
+//            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//
+//            //returns boolean matching raw password (from client) to the hash pulled from the db (i know it says get password, but that's the pass_hash when pulled from db)
+//            boolean passwordMatch = encoder.matches(loginDto.getPassword(), userDao.getUserByUsername(loginDto.getUsername()).getPassword());
+//
+//            System.out.println("client-pw matches db password controller: " + passwordMatch);
+//        //  -----   LOGGING   ----- //
+
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -66,6 +82,7 @@ public class AuthenticationController {
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public void register(@Valid @RequestBody RegisterUserDto newUser) {
         try {
+
             User user = userDao.createUser(newUser);
             if (user == null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User registration failed.");

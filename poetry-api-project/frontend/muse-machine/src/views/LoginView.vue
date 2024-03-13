@@ -27,7 +27,6 @@
 </template>
 
 <script>
-// import 'vuetify/styles'
 import authService from '../services/authServise.js';
 
 export default {

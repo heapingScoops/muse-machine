@@ -7,7 +7,6 @@ export function createStore(currentToken, currentUser) {
         state: {
             token: currentToken || '',
             user: currentUser || {},
-            // nextCreationId: 2,
             newCreation: {
                 creationId: 0,
                 userId: 0,

@@ -18,7 +18,7 @@ export default {
         let myPoem = {};
         while(true){
             randomId = Math.floor(Math.random() * 13000);
-            await axios.get(`${BASE_URL}poems/${randomId}`, {headers:{ 'Authorization': `Bearer ${token}`}})
+            await axios.get(`${BASE_URL}poems/${randomId}`, {headers:{'Authorization': `Bearer ${token}`}})
                 .then(response => myPoem = response.data)
                 .catch(error => {
                     console.error('Error:', error);
@@ -30,7 +30,7 @@ export default {
 
         let newCreation = {};
         //sends the approved poemId to backend to generate an image
-        await axios.get(BASE_URL + 'poems/image/' + randomId, {headers:{ 'Authorization': `Bearer ${token}`}}).then(response => {
+        await axios.get(BASE_URL + 'poems/image/' + randomId, {headers:{ 'Authorization': `Bearer ${token}`}, timeout: 45000}).then(response => {
             
             newCreation = response.data;
         })
