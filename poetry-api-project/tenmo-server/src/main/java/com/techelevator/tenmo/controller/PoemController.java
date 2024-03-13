@@ -45,7 +45,7 @@ public class PoemController {
     }
 
     //gets the summary by poem id
-    @GetMapping(path = "poems/summary/{id}")
+    //@GetMapping(path = "poems/summary/{id}")
     public String getSummaryByPoemId(@PathVariable int id){
         Poem poem = poemDao.getPoemById(id);
         return summaryService.fetchPoemSummary(poem);
@@ -62,17 +62,20 @@ public class PoemController {
 
         //fetch summary from Cohere
         String summary =  summaryService.fetchPoemSummary(poem);
+        System.out.println("summary created");
 
         //call DallE service to create the image based on the summary
 
             //FOR REAL: below will get an actual image
             String dalleBlobUrl = dalleService.fetchImage(summary);
+            System.out.println("image created");
 
             //FOR TESTING: below will just do this image
             //String dalleBlobUrl = "https://grammarist.com/wp-content/uploads/httpsgrammarist.comhomophonesbut-vs-butt-1024x478.png";
 
         //pass temporary url to cloudinary to save and return permanent url
         String cloudinaryUrl = cloudinaryService.uploadTest(dalleBlobUrl);
+        System.out.println("uploaded to cloudinary");
 
         //add new creation to database, and return creation object to client
         return creationDao.newCreation(cloudinaryUrl, userId, poem.getPoemId());
