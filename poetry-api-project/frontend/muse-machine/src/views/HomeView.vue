@@ -49,14 +49,23 @@ export default {
             setTimeout(() => this.typeLetters('slowly groans', 210), 8000);
             setTimeout(() => this.typeLetters(' to life', 300), 11000);
 
-            //call service that (a) grabs poem, (b) grabs img url, (c) returns a poem object
-            const newCreation = await apiService.getRandomPoem(this.$store.state.token);
+            try{
+                //call service that (a) grabs poem, (b) grabs img url, (c) returns a poem object
+                const newCreation = await apiService.getRandomPoem(this.$store.state.token);
 
-            //add poem to store
-            this.$store.commit('NEW_CREATION', newCreation);
+                //add poem to store
+                this.$store.commit('NEW_CREATION', newCreation);
 
-            //push to poemView
-            this.$router.push({ name: 'poem', params: { creationId: newCreation.creationId } })
+                //push to poemView
+                this.$router.push({ name: 'poem', params: { creationId: newCreation.creationId } })
+            }
+            catch{
+                alert("whoops. My machine tongue got tied... and my API gateway closed after 29 seconds.")
+                alert("(and my API gateway closed after 29 seconds.) :/")
+                alert("Try checking your memories...")
+                this.$router.push({ name: 'home'})
+            }
+            
         },
         startDriftingOut() {
             const words = this.$el.querySelectorAll('.gonna-drift');
