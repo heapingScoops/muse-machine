@@ -60,10 +60,13 @@ export default {
                 this.$router.push({ name: 'poem', params: { creationId: newCreation.creationId } })
             }
             catch{
-                alert("whoops. My machine tongue got tied... and my API gateway closed after 29 seconds.")
-                alert("(and my API gateway closed after 29 seconds.) :/")
+                alert("Whoops.")
+                alert("My tongue got crossed,")
+                alert("I mean: my wires got tied...")
+                alert("(also my API gateway closed after 29 seconds.)")
+                alert(":/")
                 alert("Try checking your memories...")
-                this.$router.push({ name: 'home'})
+                this.$router.push({ name: 'history'})
             }
             
         },
