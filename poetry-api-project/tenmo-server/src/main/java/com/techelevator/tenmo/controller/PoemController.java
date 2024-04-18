@@ -45,7 +45,7 @@ public class PoemController {
     }
 
     //gets the summary by poem id
-    //@GetMapping(path = "poems/summary/{id}")
+    @GetMapping(path = "poems/summary/{id}")
     public String getSummaryByPoemId(@PathVariable int id){
         Poem poem = poemDao.getPoemById(id);
         return summaryService.fetchPoemSummary(poem);
@@ -61,13 +61,22 @@ public class PoemController {
         Poem poem = poemDao.getPoemById(id);
 
         //fetch summary from Cohere
-        String summary =  summaryService.fetchPoemSummary(poem);
-        System.out.println("summary created");
+//        String summary =  summaryService.fetchPoemSummary(poem);
+//        System.out.println("summary created");
+
+        //TEMPORARY - substring dalle
+        String poemText;
+        if (poem.getPoem().length() > 3995){
+            poemText = poem.getPoem().substring(0,3994);
+        } else{
+            poemText = poem.getPoem();
+        }
 
         //call DallE service to create the image based on the summary
 
             //FOR REAL: below will get an actual image
-            String dalleBlobUrl = dalleService.fetchImage(summary);
+//            String dalleBlobUrl = dalleService.fetchImage(summary);
+            String dalleBlobUrl = dalleService.fetchImage(poemText);
             System.out.println("image created");
 
             //FOR TESTING: below will just do this image

@@ -32,6 +32,7 @@ public class SummaryService {
         }
 
         String summaryText = summaryResponse.getSummary();
+        System.out.println(summaryText);
 
         return summaryText;
     }
