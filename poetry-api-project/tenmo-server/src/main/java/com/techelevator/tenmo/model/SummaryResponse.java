@@ -1,22 +1,25 @@
 package com.techelevator.tenmo.model;
 
 public class SummaryResponse {
-    String id;
-    String summary;
+    private String responseId;
 
-    public String getId() {
-        return id;
+    public String getResponseId() {
+        return responseId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setResponseId(String responseId) {
+        this.responseId = responseId;
     }
 
-    public String getSummary() {
-        return summary;
+    public String getText() {
+        return text;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setText(String text) {
+        this.text = text;
     }
+
+    private String text;
+
+
 }

@@ -60,27 +60,22 @@ public class PoemController {
         //get poem object from database
         Poem poem = poemDao.getPoemById(id);
 
-        //fetch summary from Cohere
-//        String summary =  summaryService.fetchPoemSummary(poem);
-//        System.out.println("summary created");
+        //COHERE PIPELINE
+        String summary =  summaryService.fetchPoemSummary(poem);
+        String dalleBlobUrl = dalleService.fetchImage(summary);
 
-        //TEMPORARY - substring dalle
-        String poemText;
-        if (poem.getPoem().length() > 3995){
-            poemText = poem.getPoem().substring(0,3994);
-        } else{
-            poemText = poem.getPoem();
-        }
+        //DALLE-ONLY PIPELINE
+//        String poemText;
+//        if (poem.getPoem().length() > 3995){
+//            poemText = poem.getPoem().substring(0,3994);
+//        } else{
+//            poemText = poem.getPoem();
+//        }
+//        String dalleBlobUrl = dalleService.fetchImage(poemText);
 
-        //call DallE service to create the image based on the summary
 
-            //FOR REAL: below will get an actual image
-//            String dalleBlobUrl = dalleService.fetchImage(summary);
-            String dalleBlobUrl = dalleService.fetchImage(poemText);
-            System.out.println("image created");
-
-            //FOR TESTING: below will just do this image
-            //String dalleBlobUrl = "https://grammarist.com/wp-content/uploads/httpsgrammarist.comhomophonesbut-vs-butt-1024x478.png";
+        //SKIP DALL-E PIPELINE, FOR TESTING ONLY
+        //String dalleBlobUrl = "https://grammarist.com/wp-content/uploads/httpsgrammarist.comhomophonesbut-vs-butt-1024x478.png";
 
         //pass temporary url to cloudinary to save and return permanent url
         String cloudinaryUrl = cloudinaryService.uploadTest(dalleBlobUrl);

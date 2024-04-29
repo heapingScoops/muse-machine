@@ -15,23 +15,26 @@ public class SummaryService {
 
     //USE System.getenv() for AWS
     private String COHERE_AUTH_TOKEN = System.getenv("COHERE_AUTH_TOKEN");
-    private static final String baseUrl = "https://api.cohere.ai/v1/summarize";
+    private static final String baseUrl = "https://api.cohere.ai/v1/chat";
     private RestTemplate restTemplate = new RestTemplate();
 
     public String fetchPoemSummary(Poem poem){
+        //create summaryDto object to send to cohere
         SummaryDto summary = new SummaryDto();
-        summary.setText(poem.getPoem());
+
+        //set message we send to be the poem's text
+        summary.setMessage(poem.getPoem());
         SummaryResponse summaryResponse = null;
 
         try {
             ResponseEntity<SummaryResponse> response = restTemplate.exchange(baseUrl, HttpMethod.POST, makeSummaryEntity(summary), SummaryResponse.class);
             summaryResponse = response.getBody();
-            //
+            System.out.println(summaryResponse.getResponseId());
         } catch (RestClientResponseException | ResourceAccessException e) {
             e.getRootCause();
         }
 
-        String summaryText = summaryResponse.getSummary();
+        String summaryText = summaryResponse.getText();
         System.out.println(summaryText);
 
         return summaryText;
